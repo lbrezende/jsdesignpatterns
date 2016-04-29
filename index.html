@@ -6,17 +6,40 @@
 	<link rel="stylesheet" href="index.css">
 </head>
 <body>
-	<section>
-		<div id="cat-list">
-			<div class="cat-item">
-				<h2>Click the cat my friend!</h2>
-				<img id="cat" src="img/cat.jpg">
-				<div>You have clicked <span class="counter">0</span> times</div>
+	<aside id="menu-cat">
+			<div id="cat1" class="menu-cat__list">
+				<h2 class="menu-cat__name">Cat 1</h2>
+				<img class="menu-cat__photo" src="img/cat1.jpg">
 			</div>	
-			<div class="cat-item">
-				<h2>Click the cat my friend!</h2>
-				<img id="cat2" src="img/cat2.jpg">
-				<div>You have clicked <span class="counter2">0</span> times</div>
+			<div id="cat2" class="menu-cat__list">
+				<h2 class="menu-cat__name">Cat 2</h2>
+				<img class="menu-cat__photo" src="img/cat2.jpg">
+			</div>	
+			<div id="cat3" class="menu-cat__list">
+				<h2 class="menu-cat__name">Cat 3</h2>
+				<img class="menu-cat__photo" src="img/cat3.jpg">
+			</div>	
+			<div id="cat4" class="menu-cat__list">
+				<h2 class="menu-cat__name">Cat 4</h2>
+				<img class="menu-cat__photo" src="img/cat4.jpg">
+			</div>	
+			<div id="cat5" class="menu-cat__list">
+				<h2 class="menu-cat__name">Cat 5</h2>
+				<img class="menu-cat__photo" src="img/cat5.jpg">
+			</div>																			
+	</aside>
+	<section id="display-cat">
+		<h2 class="display-cat__title m-b-30">Select a cat on the left bar to see it bigger!</h2>
+		
+		<div class="display-cat__content">
+			<div id="display-cat__content--blank">
+				<h3 class="display-cat__name">No cats selected</h3>
+				<img class="display-cat__img" src="img/noCat.png">
+			</div>
+			<div id="display-cat__content--show">
+				<h3 class="display-cat__name">Hi! I am <span id="display-cat__name-description">{{cat name}}</span>!</h3>
+				<img id="display-cat__img" src="img/cat1.jpg" />
+				<h3 class="display-cat__number">Your cat was clicked <span id="display-cat__counter">{{clicks}}</span> times</h3>
 			</div>			
 		</div>
 	</section>

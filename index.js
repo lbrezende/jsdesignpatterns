@@ -1,38 +1,83 @@
 /*Executing javascript after page load*/
 window.onload = function() {
 
-	/*************************
-	/* Starting global variables (too ugly)
-	/*************************/
-	var i = "1";
-	var j = "1";
 
-	/*************************
-	/* Unreusable code for cat 1
-	/*************************/
+    /**********************
+    initialize()
+        Shows placeholder and hide display cat area
+        
+    Author: Leandro
+    Date: 29/04/2016
+    /**********************/
+    function initialize() {
+        var display = document.getElementById("display-cat__content--show");
+        display.style.display = "none";
+    }
 
-	var cat = document.getElementById("cat");
-	cat.addEventListener("click", incrementCounter, false);
+    /**********************
+    displayFirstCat()
+        Hides placeholder and show display cat area
 
-	function incrementCounter() {
-		var screen = document.getElementsByClassName("counter")[0];
-		screen.innerHTML = i;
-		i++;
-	}
+    Author: Leandro
+    Date: 29/04/2016
+    /**********************/
+    function displayFirstCat(){
+        var display = document.getElementById("display-cat__content--show");
+        var displayBlank = document.getElementById("display-cat__content--blank");
+        displayBlank.style.display = "none";
+        display.style.display = "block";
+    }
 
-	/*************************
-	/* Unreusable code for cat 2
-	/*************************/	
+    /**********************
+    updateCat()
+        Add a eventListener to each item in menu to display bigger in display area after click
 
-	var cat2 = document.getElementById("cat2");
-	cat2.addEventListener("click", incrementCounter2, false);
+    Author: Leandro
+    Date: 29/04/2016
+    /**********************/
+    function updateCat() {
 
-	function incrementCounter2() {
-		var screen2 = document.getElementsByClassName("counter2")[0];
-		screen2.innerHTML = j;
-		j++;
-	}	
 
+        //Areas to update numbers
+        var catCounterDisplay = document.getElementById("display-cat__counter");
+        var catNameDisplay = document.getElementById("display-cat__name-description");
+        var catImgDisplay = document.getElementById("display-cat__img");
+
+        //Selector to add eventListener        
+        var selectedCat = document.getElementsByClassName("menu-cat__list");
+
+        //Iteraction to add a eventListener in each item of the list
+        for (var i = 0; i < selectedCat.length; i++) {
+
+           //counter
+           catCounter = 1;  
+
+           //getCatData
+           catId = selectedCat[i].id;
+           catName = selectedCat[i].getElementsByClassName("menu-cat__name")[0].innerText;
+           catImage = selectedCat[i].getElementsByClassName("menu-cat__photo")[0].src;
+
+           //encapsulate funcion as closure to use the variable in the context
+           selectedCat[i].addEventListener("click", (function(catCounterCopy, catNameCopy, catImageCopy) {
+                
+                return function() {
+                    displayFirstCat();
+                    catNameDisplay.innerHTML = catNameCopy;
+                    catCounterDisplay.innerHTML = catCounterCopy;
+                    catImgDisplay.src = catImageCopy;
+                    catCounterCopy++;
+                }
+
+           })(catCounter, catName, catImage));
+
+        };
+
+    }
+
+
+    //Initialize layout 
+    initialize();
+    updateCat();
 
 } 
 
