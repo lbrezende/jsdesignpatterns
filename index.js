@@ -2,7 +2,7 @@
 window.onload = function() {
 
 
-    var model = {
+    var catsModel = {
         getAllCats: function() {
             cats = [
                 {
@@ -35,38 +35,38 @@ window.onload = function() {
         }
     }
 
-    var view = {
+    var catsView = {
         init: function() {
-            this.menuArea = document.getElementById('menu-cat');
-            this.displayAreaBlank = document.getElementById('display-cat__content--blank');
-            this.displayAreaShow = document.getElementById('display-cat__content--show');
+            menuArea = document.getElementById('menu-cat');
+            displayAreaBlank = document.getElementById('display-cat__content--blank');
+            displayAreaShow = document.getElementById('display-cat__content--show');
             
-            view.renderButtons();
-            view.renderCats();
-            view.renderBlank();
+            catsView.renderButtons();
+            catsView.renderCats();
+            catsView.renderBlank();
         },
         renderButtons: function() {
             var htmlBtns = '';
-            octopus.getCats().forEach(function(cat){
+            catsOctopus.getCats().forEach(function(cat){
                 htmlBtns += '<div id="'+cat.id+'" class="menu-cat__list"><h2 class="menu-cat__name">'+cat.name+'</h2><img class="menu-cat__photo" src="'+cat.image+'"></div>';
             })
-            this.menuArea.innerHTML = htmlBtns ;
+            menuArea.innerHTML = htmlBtns ;
         },
         renderCats: function() {
-            this.displayAreaShow.innerHTML = '<h3 class="display-cat__name">Hi! I am <span id="display-cat__name-description">{{cat name}}</span>!</h3><img id="display-cat__img" src="img/cat1.jpg" /><h3 class="display-cat__number">Your cat was clicked <span id="display-cat__counter">{{clicks}}</span> times</h3>';
+            displayAreaShow.innerHTML = '<h3 class="display-cat__name">Hi! I am <span id="display-cat__name-description">{{cat name}}</span>!</h3><img id="display-cat__img" src="img/cat1.jpg" /><h3 class="display-cat__number">Your cat was clicked <span id="display-cat__counter">{{clicks}}</span> times</h3>';
         },
         renderBlank: function() {
-            this.displayAreaBlank.innerHTML = '<h3 class="display-cat__name">No cats selected</h3><img class="display-cat__img" src="img/noCat.png">' ;
+            displayAreaBlank.innerHTML = '<h3 class="display-cat__name">No cats selected</h3><img class="display-cat__img" src="img/noCat.png">' ;
         }        
     }
 
-    var octopus = {
+    var catsOctopus = {
         init: function(){
             var display = document.getElementById("display-cat__content--show");
             display.style.display = "none";       
         },
         getCats: function(){
-            return model.getAllCats();
+            return catsModel.getAllCats();
         },
         updateCat: function(){
            //Areas to update numbers
@@ -91,7 +91,7 @@ window.onload = function() {
                selectedCat[i].addEventListener("click", (function(catCounterCopy, catNameCopy, catImageCopy) {
                     
                     return function() {
-                        octopus.displayFirstCat();
+                        catsOctopus.displayFirstCat();
                         catNameDisplay.innerHTML = catNameCopy;
                         catCounterDisplay.innerHTML = catCounterCopy;
                         catImgDisplay.src = catImageCopy;
@@ -111,9 +111,82 @@ window.onload = function() {
     }
 
 
-    octopus.init();
-    view.init();    
-    octopus.updateCat();
+    catsOctopus.init();
+    catsView.init();    
+    catsOctopus.updateCat();
+
+
+    var adminModel = {
+        init: function (){
+
+        },
+        add: function(obj){
+
+            catsModel.getAllCats.cats.push(obj);
+            console.log('passou');
+        }
+    }
+
+    var adminView = {
+ 
+    }
+
+    var adminOctopus = {
+        init: function() {
+            document.getElementById('form-admin').style.display = "none";
+            document.getElementById('close-admin').style.display = "none";
+
+            document.getElementById('open-admin').addEventListener('click', function(){
+                adminOctopus.renderAdminForm();
+            }, false); 
+
+            document.getElementById('save-cat').addEventListener('click', function(){
+                
+                var newCatSubmit = document.getElementById('save-cat');
+
+                newCatSubmit.addEventListener('click', function(e){
+
+                    newCatName = document.getElementById('form-name');
+                    newCatId = document.getElementById('form-id');
+                    newCatImg = document.getElementById('form-image');
+                    
+                    adminOctopus.saveAdminForm(newCatName.value, newCatId.value, newCatImg.value);
+                    newCatName.val('');
+                    newCatId.val('');
+                    newCatImg.val('');
+                    e.preventDefault();
+                });    
+
+                catsOctopus.updateCat();
+            }, false);       
+
+            document.getElementById('close-admin').addEventListener('click', function(){
+                adminOctopus.removeAdminForm();
+            }, false);                                        
+        },
+        renderAdminForm: function() {
+            document.getElementById('form-admin').style.display = "inline-block";
+            document.getElementById('close-admin').style.display = "inline-block";
+            document.getElementById('open-admin').style.display = "none";
+        }, 
+        removeAdminForm: function() {
+            document.getElementById('form-admin').style.display = "none";
+            document.getElementById('close-admin').style.display = "none";
+            document.getElementById('open-admin').style.display = "inline-block";
+        },
+        saveAdminForm: function(name, id, img) {
+            alert(name);
+            adminModel.add({
+                    id: name,                    
+                    name: id,
+                    image: img
+            });
+
+
+        }                           
+    }        
+
+    adminOctopus.init();
 
 
 } 

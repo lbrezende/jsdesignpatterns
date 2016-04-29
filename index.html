@@ -2,17 +2,31 @@
 <html>
 <head>
 	<title>Cat Clicker</title>
-	<script type="text/javascript" src="index.js"></script>
 	<link rel="stylesheet" href="index.css">
 </head>
 <body>
+	<aside id="admin">
+		<a id="open-admin" href="javascript:void(0);"  class="btn btn-info btn-regular">Admin</a>
+
+		<form id="form-admin">
+			<input id="form-id" name="id" placeholder="Type the id"></input>
+			<input id="form-name" name="name" placeholder="Type the name"></input>
+			<input id="form-image" name="image" placeholder="Type the image"></input>
+			<a id="save-cat" href="javascript:void(0);" class="btn btn-info btn-regular">Save</a>	
+			<a id="close-admin"  class="btn btn-info btn-regular">Logout without save</a>		
+		</form>
+	</aside>
 	<aside id="menu-cat"></aside>
+
 	<section id="display-cat">
-		<h2 class="display-cat__title m-b-30">Select a cat on the left bar to see it bigger!</h2>
+		<h2 class="display-cat__title m-b-30 m-t-30">Select a cat on the left bar to see it bigger!</h2>
 		<div class="display-cat__content">
 			<div id="display-cat__content--blank"></div>
 			<div id="display-cat__content--show"></div>	
 		</div>
 	</section>
+
+	<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript" src="admin.js"></script>
 </body>
 </html>
