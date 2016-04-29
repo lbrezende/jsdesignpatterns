@@ -1,0 +1,15 @@
+#cat-list {
+	display:flex;
+	text-align: center;
+}
+
+#cat-list img {
+	cursor: pointer;
+	margin-bottom:20px;
+	max-height: 300px;
+}
+
+.cat-item {
+	width: 50%;
+}
+
